@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { object, string, number, date, InferType } from 'yup';
+import { object, string } from 'yup';
 
 const schema = object().shape({
   name: string().required(),
@@ -64,10 +64,8 @@ const schema = object().shape({
 // }
 const initialValues = { name: '', number: '' };
 
-function ContactForm(props) {
+function ContactForm() {
   const handleSubmit = (values, { resetForm }) => {
-    // event.preventDefault();
-    // this.props.onSubmit(this.state);
     console.log(values);
     resetForm();
   };
