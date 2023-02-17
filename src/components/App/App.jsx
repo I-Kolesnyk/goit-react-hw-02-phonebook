@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+import {
+  Container,
+  Section,
+  SectionsContainer,
+  Title,
+  SectionTitle,
+} from './App.styled';
 
 class App extends Component {
   state = {
@@ -15,26 +22,23 @@ class App extends Component {
     filter: '',
   };
 
-  // addContact = ({ name, number }) => {
-  //   const contact = { id: nanoid(), name, number };
-  //   const normalizedName = name.toLowerCase();
+  addContact = ({ name, number }) => {
+    const contact = { id: nanoid(), name, number };
+    const normalizedName = name.toLowerCase();
+    console.log(contact);
 
-  //   if (
-  //     this.state.contacts.find(
-  //       contact => contact.name.toLowerCase() === normalizedName
-  //     )
-  //   ) {
-  //     return alert(`${name} is already in contacts!`);
-  //   }
+    if (
+      this.state.contacts.find(
+        contact => contact.name.toLowerCase() === normalizedName
+      )
+    ) {
+      return alert(`${name} is already in contacts!`);
+    }
 
-  //   this.setState(prevState => ({
-  //     contacts: [contact, ...prevState.contacts],
-  //   }));
-  // };
-
-  // addContact = (values, { resetForm }) => {
-  //   console.log(values);
-  // };
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
+  };
 
   deleteContact = contactId => {
     this.setState(prevState => ({
@@ -57,17 +61,23 @@ class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm />
-
-        <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChange={this.filterContacts} />
-        <ContactList
-          contacts={filteredContacts}
-          onDeleteButton={this.deleteContact}
-        />
-      </div>
+      <Container>
+        <Title>Phonebook</Title>
+        <SectionsContainer>
+          <Section>
+            <SectionTitle>Add contact</SectionTitle>
+            <ContactForm onSubmit={this.addContact} />
+          </Section>
+          <Section className="contacts">
+            <SectionTitle>Contacts</SectionTitle>
+            <Filter value={this.state.filter} onChange={this.filterContacts} />
+            <ContactList
+              contacts={filteredContacts}
+              onDeleteButton={this.deleteContact}
+            />
+          </Section>
+        </SectionsContainer>
+      </Container>
     );
   }
 }
