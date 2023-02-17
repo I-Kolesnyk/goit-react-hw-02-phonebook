@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
+import { ListItem, StyledButton } from './ContactItem.styled';
 
 function ContactItem({ id, name, number, onClick }) {
   return (
-    <li>
+    <ListItem>
       <p>
         {name}: {number}
       </p>
-      <button
+      <StyledButton
         type="button"
         onClick={() => {
           onClick(id);
         }}
       >
         Delete
-      </button>
-    </li>
+      </StyledButton>
+    </ListItem>
   );
 }
 

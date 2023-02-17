@@ -73,8 +73,8 @@ import {
 const initialValues = { name: '', number: '' };
 
 const schema = object().shape({
-  name: string().required(),
-  number: string().required(),
+  name: string().max(20).required(),
+  number: string().min(3).required(),
 });
 
 function validateNumber(value) {

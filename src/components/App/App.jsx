@@ -25,7 +25,6 @@ class App extends Component {
   addContact = ({ name, number }) => {
     const contact = { id: nanoid(), name, number };
     const normalizedName = name.toLowerCase();
-    console.log(contact);
 
     if (
       this.state.contacts.find(
@@ -51,14 +50,16 @@ class App extends Component {
   };
 
   getFilteredContacts = () => {
-    const normalizedFilter = this.state.filter.toLowerCase();
-    return this.state.contacts.filter(contact =>
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
   render() {
     const filteredContacts = this.getFilteredContacts();
+    const { addContact, filterContacts, deleteContact, state } = this;
 
     return (
       <Container>
@@ -66,14 +67,14 @@ class App extends Component {
         <SectionsContainer>
           <Section>
             <SectionTitle>Add contact</SectionTitle>
-            <ContactForm onSubmit={this.addContact} />
+            <ContactForm onSubmit={addContact} />
           </Section>
           <Section className="contacts">
             <SectionTitle>Contacts</SectionTitle>
-            <Filter value={this.state.filter} onChange={this.filterContacts} />
+            <Filter value={state.filter} onChange={filterContacts} />
             <ContactList
               contacts={filteredContacts}
-              onDeleteButton={this.deleteContact}
+              onDeleteButton={deleteContact}
             />
           </Section>
         </SectionsContainer>
