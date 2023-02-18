@@ -9,6 +9,8 @@ export const Container = styled.div`
 
 export const SectionsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-around;
 `;
 
@@ -31,7 +33,7 @@ export const Section = styled.section`
   }};
 
   &.contacts {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 `;
 

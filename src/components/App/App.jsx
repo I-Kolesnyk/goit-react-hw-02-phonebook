@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+import Message from 'components/Message';
 import {
   Container,
   Section,
@@ -71,11 +72,17 @@ class App extends Component {
           </Section>
           <Section className="contacts">
             <SectionTitle>Contacts</SectionTitle>
-            <Filter value={state.filter} onChange={filterContacts} />
-            <ContactList
-              contacts={filteredContacts}
-              onDeleteButton={deleteContact}
-            />
+            {state.contacts.length !== 0 ? (
+              <>
+                <Filter value={state.filter} onChange={filterContacts} />
+                <ContactList
+                  contacts={filteredContacts}
+                  onDeleteButton={deleteContact}
+                />
+              </>
+            ) : (
+              <Message message="There are no contacts in your phonebook. Please add your first contact!" />
+            )}
           </Section>
         </SectionsContainer>
       </Container>
